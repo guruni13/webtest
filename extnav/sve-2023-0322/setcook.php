@@ -1,8 +1,8 @@
-
+<html>
+   
 <?php
    setcookie("name", "SHADOW2639", ['SameSite' => 'Strict']);
 ?>
-<html>
    <body>
       <center><h2>Setting Cookies with "SameSite:Strict"</h2>
       <br>
