@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Cool App</title>
+</head>
+<body>
+    <div id="redirect-div" onclick="navigate()">
+        <h1>Opening My Cool App...</h1>
+    </div>
+  
+
+
+<script type="text/javascript">
+   function navigate() {      
+       var url="market://details?id=com.clearchannel.iheartradio.controller&referrer=af_tranid%3DwLAY2cvCfdbAMyH4qeM6yQ;scheme=android-app;end";
+       window.location = url;
+    }
+    window.onload=function(){
+       navigate();
+    }
+</script>
+</body>
+</html>
