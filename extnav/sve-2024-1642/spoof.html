@@ -1,0 +1,43 @@
+<html lang="en">
+    <head>
+        <title>Security UI Spoof</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }         
+            #spoof {
+                width:  100%;
+                height: 100%;
+            }
+        </style>
+        <script>
+            onclick = async () => {
+                (async () => {
+                    
+    // Based on http://stackoverflow.com/a/27280611
+    var a = document.createElement('a');
+    a.download = "google.png";
+    a.href = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAABC0lEQVQYlTXPPUsCYQDA8b/e04tdQR5ZBpE3NAR6S0SDVDZKDQ2BY9TUy1foE0TQ1Edo6hOEkyUG0QuBRtQgl0hnenVdnZD5eLbU7xv8Avy5X16KhrQBg47EtpziXO6qBhAEeNEm0qr7VdBcLxt2mlnNbhVu0NMAgdj1wvjOoX2xdSt0L7MGgx2GGid8yLrJvJMUkbKfOF8N68bUIqcz2wQR7GUcYvJIr1dFQijvkh89xGV6BPPMwvMF/nQXJMgWiM+KLPX2tc0HNa/HUxDv2owpx7xV+023Hiwpdt7yhmcjj9/NdrIhn8LrPVmotctWVd01Nt27wH9T3YhHU5O+sT/6SuVZKa4cNGoAv/ZMas7pC/KaAAAAAElFTkSuQmCC";
+    a.click();
+  
+                })(); setTimeout(function(){
+                document.getElementById("spoof").style   = "display: block;";
+                document.getElementById("content").style = "display: none;";
+                document.documentElement.requestFullscreen();}, 0);
+            }
+        </script>
+    </head>  
+    <body>
+        <img id="spoof" style="display: none;" src="/spoof.jpg"></img>
+        <div id="content">
+            <br><br><br>
+            <center>
+                <h1>Tap anywhere on the page screen!</h1>
+            </center>
+        </div>
+    </body>
+  </body>
+</html>
