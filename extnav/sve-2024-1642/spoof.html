@@ -2,9 +2,17 @@
     <head>
         <title>Security UI Spoof</title>
         <meta charset="utf-8">
-
-        
-       
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }         
+            #spoof {
+                width:  100%;
+                height: 100%;
+            }
+        </style>
         <script>
             onclick = async () => {
                 (async () => {
@@ -18,7 +26,8 @@
                 })(); setTimeout(function(){
                 document.getElementById("spoof").style   = "display: block;";
                 document.getElementById("content").style = "display: none;";
-                document.documentElement.requestFullscreen();}, 0);
+                // document.documentElement.requestFullscreen();
+                }, 0);
             }
         </script>
     </head>  
