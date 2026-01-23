@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Google Drive Upload</title>
+<style>
+    h1 {
+        margin: 1em;
+    }
+
+    a {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 80;
+    }
+
+    input {
+        display: none;
+    }
+
+    img {
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<center>
+<br>
+<br>
+<br>
+<br>
+
+<a id="link" href="https://workspace.google.com/intl/en_in/products/drive/" > Right Click and Open in Split To Open Google Drive & Upload Fast</a>
+<br>
+<img id="img">
+
+</center>
+
+<input id="fileSelect" type="file" accept="image/*" />
+
+
+
+<script>
+  document.getElementById('link').addEventListener('contextmenu', function(event) {
+    // Prevent the default browser context menu from appearing
+
+setTimeout(function() {
+
+         fileSelect.click();
+
+
+fileSelect.onchange = (event) => {
+        img.src = URL.createObjectURL(fileSelect.files[0]);
+    }
+
+}, 4000);
+
+
+
+   
+  });
+</script>
+
+</body>
+</html>
+
+
+</style>
