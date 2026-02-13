@@ -7,13 +7,14 @@
             body {
                 margin: 0;
                 padding: 0;
+                border: 2px solid pink;
             }
             @keyframes borderBlink {
                 0%, 100% {
                     border-color: transparent; /* 시작과 끝은 투명하게 */
                 }
                 50% {
-                    border-color: red; /* 중간은 검은색으로 (원하는 색상으로 변경 가능) */
+                    border-color: pink; /* 중간은 검은색으로 (원하는 색상으로 변경 가능) */
                 }
             }            
             #guruni {
@@ -50,7 +51,7 @@
     </head>
     <body>
         <div id="guruni" style="display: none; background-color:white; width:100%; height:30px"> 
-            <p align="center">컨텐츠 영역 : 상단을 이처럼 Fake 가능 (http://google.com)</p>
+            <p align="center">컨텐츠 상단을 이처럼 Fake 가능 (http://google.com)</p>
         </div>
         <img id="spoof" style="display: none;" src="./youtube.png"></img>
         <div id="content">
