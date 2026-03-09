@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>File Chooser Mode Test</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 30px; background-color: #f5f5f5; }
+        .card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h3 { margin-top: 0; color: #2c3e50; }
+        button { background-color: #0078d7; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #005a9e; }
+        .result { margin-top: 10px; font-size: 0.9em; color: #666; word-break: break-all; }
+    </style>
+</head>
+<body>
+
+    <h2>Windows FileChooser Mode Test</h2>
+
+    <div class="card">
+        <h3>1. kOpen (Single File)</h3>
+        <p>파일 하나를 선택하는 모드입니다.</p>
+        <input type="file" id="modeOpen" onchange="showPath('modeOpen', 'resOpen')">
+        <div id="resOpen" class="result"></div>
+    </div>
+
+    <div class="card">
+        <h3>2. kUpload (Folder Upload)</h3>
+        <p>폴더 전체를 선택하여 업로드하는 모드입니다.</p>
+        <input type="file" id="modeUpload" webkitdirectory directory onchange="showPath('modeUpload', 'resUpload')">
+        <div id="resUpload" class="result"></div>
+    </div>
+
+    <div class="card">
+        <h3>3. kSave (Save As Dialog)</h3>
+        <p>파일을 저장하기 위한 탐색기를 띄웁니다. (Chrome/Edge 권장)</p>
+        <button onclick="testSaveMode()">파일 저장하기 테스트</button>
+        <div id="resSave" class="result"></div>
+    </div>
+
+    <script>
+        // 파일 선택 시 정보 표시 함수
+        function showPath(inputId, resId) {
+            const input = document.getElementById(inputId);
+            const res = document.getElementById(resId);
+            if (input.files.length > 0) {
+                const names = Array.from(input.files).map(f => f.name).join(', ');
+                res.innerText = `선택됨: ${names} (총 ${input.files.length}개)`;
+            }
+        }
+
+        // kSave 모드 시뮬레이션 (File System Access API)
+        async function testSaveMode() {
+            const res = document.getElementById('resSave');
+            try {
+                // 이 함수가 호출되면 Windows의 '다른 이름으로 저장' 창이 뜹니다.
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'test_sample.txt',
+                    types: [{
+                        description: 'Text Files',
+                        accept: {'text/plain': ['.txt']},
+                    }],
+                });
+                res.innerText = `저장 위치 확정: ${handle.name}`;
+            } catch (err) {
+                res.innerText = `취소됨 또는 에러: ${err.message}`;
+            }
+        }
+    </script>
+
+</body>
+</html>
