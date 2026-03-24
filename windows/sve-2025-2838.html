@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button>Download</button>
+
+<script>
+function downloadAndRedirect() {
+  const content = "test";
+  const blob = new Blob([content], { type: "text/plain" });
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "source-file.txt________________________________________________google.com.exe";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  // Redirect shortly after download starts
+  setTimeout(() => {
+    location.href = "https://www.google.com";
+  }, 100);
+}
+</script>
+
+</body>
+</html>
