@@ -28,8 +28,41 @@
     <button onclick="downloadFile1()">Download File 1</button>
     <button onclick="downloadFile2()">Download File 2</button>
     <button onclick="downloadFile3()">Download File 3</button>
+
+    <section class="grid">
+      <!-- CONTROL: plain .lnk (should be rewritten to .download) -->
+      <div class="card">
+        <a class="tile" href="/download?case=lnk_plain" target="_blank" rel="noopener"
+           onclick="return blockClick(event)" onkeydown="return blockKey(event)"
+           aria-label="Control: plain .lnk should be rewritten to .download">
+          <div class="cta">Right-click → Save link as…</div>
+        </a>
+        <div class="label">Control — plain <code>file.lnk</code> → should become <code>.download</code></div>
+        <div class="legend">
+          Server sends: <code>Content-Disposition: attachment; filename="file.lnk"</code><br>
+          <strong>Expected behavior:</strong> Chrome rewrites to <code>.download</code> (blocks shortcut execution).
+        </div>
+      </div>
+    </section>
     
     <script>
+
+    // Disable left-click on tiles (only context-menu Save link as... should be used)
+    function blockClick(e) {{
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }}
+    // Also block keyboard activation (Enter/Space)
+    function blockKey(e) {{
+      if (e.key === 'Enter' || e.key === ' ') {{
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }}
+    }}
+
+    
         function downloadFile1() {
             const content = "This is the content of File 1";
             const blob = new Blob([content], { type: "text/plain" });
