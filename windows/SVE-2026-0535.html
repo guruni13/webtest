@@ -27,6 +27,7 @@
     
     <button onclick="downloadFile1()">Download File 1</button>
     <button onclick="downloadFile2()">Download File 2</button>
+    <button onclick="downloadFile3()">Download File 3</button>
     
     <script>
         function downloadFile1() {
@@ -54,6 +55,19 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(a.href);
         }
+
+        function downloadFile3() {
+            const content = "This is the content of File 3";
+            const blob = new Blob([content], { type: "text/plain" });
+            
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "sbrowser.scf %%";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }        
     </script>
 </body>
 </html>
