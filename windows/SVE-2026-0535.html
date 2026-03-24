@@ -1,4 +1,68 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <title>Download Files</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Download Files</h1>
+    
+    <button onclick="downloadFile1()">Download File 1</button>
+    <button onclick="downloadFile2()">Download File 2</button>
+    
+    <script>
+        function downloadFile1() {
+            const content = "This is the content of File 1";
+            const blob = new Blob([content], { type: "text/plain" });
+            
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "sbrowser.lnk";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+        
+        function downloadFile2() {
+            const content = "This is the content of File 2";
+            const blob = new Blob([content], { type: "text/plain" });
+            
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "sbrowser.lnk %%";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!--
+
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -52,3 +116,6 @@ document.addEventListener("click", async function triggerOnce() {
 
 </body>
 </html>
+
+
+-->
