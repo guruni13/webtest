@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Download UX Test</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .test-container { border: 1px solid #ccc; padding: 20px; border-radius: 8px; background-color: #f9f9f9; }
+        .warning { color: #d9534f; font-weight: bold; }
+        .url-display { font-family: monospace; word-break: break-all; background: #eee; padding: 10px; display: block; margin: 10px 0; }
+        .btn { display: inline-block; padding: 10px 20px; background-color: #0275d8; color: white; text-decoration: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background-color: #025aa5; }
+    </style>
+</head>
+<body>
+
+    <h2>Chromium 파일명 표시 및 보안 UX 테스트</h2>
+    <div class="test-container">
+        <p class="warning">⚠️ 주의: 실제 의심스러운 URL을 포함하고 있습니다. 격리된 환경에서만 사용하세요.</p>
+        
+        <p><strong>테스트 대상 URL:</strong></p>
+        <code class="url-display" id="targetUrl">
+            https://administrat-jawai-login-cloud-instagram-google-youtube.com-tiktok.com.lazysec.my.id/maalware.zip
+        </code>
+
+        <h3>Test 1: 기본 다운로드</h3>
+        <p>서버에서 설정한 파일명을 브라우저가 어떻게 렌더링하는지 확인합니다.</p>
+        <a href="https://administrat-jawai-login-cloud-instagram-google-youtube.com-tiktok.com.lazysec.my.id/maalware.zip" 
+           class="btn">
+            기본 이름으로 다운로드
+        </a>
+
+        <hr>
+
+        <!-- <h3>Test 2: 매우 긴 파일명 강제 지정</h3>
+        <p>브라우저 UI가 `MAX_PATH` 근처의 긴 이름을 어떻게 생략(Ellipsis) 처리하는지 확인합니다.</p>
+        <a id="longNameDownload" class="btn" style="background-color: #5cb85c;">
+            매우 긴 이름으로 다운로드 시도
+        </a> -->
+    </div>
+
+    <!-- <script>
+        // 테스트 2를 위한 스크립트: 200자가 넘는 파일명 생성
+        const longFileName = "this_is_a_very_long_filename_to_test_how_chrome_ux_handles_extreme_lengths_and_potential_path_limitations_in_the_download_shelf_or_bubble_ui_final_v1_test_security_check.zip";
+        const targetUrl = "https://administrat-jawai-login-cloud-instagram-google-youtube.com-tiktok.com.lazysec.my.id/maalware.zip";
+        
+        const link = document.getElementById('longNameDownload');
+        link.href = targetUrl;
+        link.download = longFileName;
+    </script> -->
+
+</body>
+</html>
