@@ -48,3 +48,23 @@
 
 
 
+<!-- 
+Browser* browser = chrome::FindTabbedBrowser(profile, false);
+  if (browser) {
+    browser->window()->Activate();
+    return;
+  }
+
+  // [핵심] 게스트 모드의 제약을 우회하여 일반 프로필의 새 창을 강제로 띄웁니다.
+  // StartupBrowserCreator를 사용하면 사용자의 시작 페이지 설정(NTP 등)에 맞춰 안전하게 새 창이 생성됩니다.
+  StartupBrowserCreator startup_browser_creator;
+  startup_browser_creator.LaunchBrowser(
+      base::CommandLine(base::CommandLine::NO_PROGRAM), 
+      profile,
+      base::FilePath(), 
+      chrome::startup::IsProcessStartup::kNo,
+      chrome::startup::IsFirstRun::kNo, 
+      /*output_copy=*/nullptr);
+--!>
+
+
