@@ -1,0 +1,78 @@
+#ifndef COMPONENTS_SYNC_BASE_COPY_USER_SELECTABLE_TYPE_H_
+#define COMPONENTS_SYNC_BASE_COPY_USER_SELECTABLE_TYPE_H_
+
+#include <string_view>
+
+namespace syncer {
+
+// 8개의 고유한 동기화/선택 타입을 정의하는 enum class
+enum class CopyUserSelectableType {
+  kBookmarks,
+  kPreferences,
+  kPasswords,
+  kAutofill,
+  kThemes,
+  kHistory,
+  kExtensions,
+  kReadingList,
+};
+
+// 문자열을 입력받아 상응하는 CopyUserSelectableType을 반환하는 함수
+// 매칭되는 타입이 없을 경우 std::nullopt를 반환하여 안전성을 높입니다.
+enum class CopyUserSelectableType; // 전방 선언 대신 아래 직접 반환 타입으로 사용
+#include <optional>
+
+std::optional<CopyUserSelectableType> GetUserSelectableTypeFromString(
+    std::string_view type_string);
+
+}  // namespace syncer
+
+#endif  // COMPONENTS_SYNC_BASE_COPY_USER_SELECTABLE_TYPE_H_
+
+
+
+#include "components/sync/base/copy_user_selectable_type.h"
+
+#include <array>
+#include <utility>
+#include "base/containers/fixed_flat_map.h" // Chromium의 고성능 정적 맵 컴포넌트
+
+namespace syncer {
+
+// 1. 요청하신 8개의 유형별 constexpr 문자열 상수 정의
+constexpr char kBookmarksTypeName[] = "bookmarks";
+constexpr char kPreferencesTypeName[] = "preferences";
+constexpr char kPasswordsTypeName[] = "passwords";
+constexpr char kAutofillTypeName[] = "autofill";
+constexpr char kThemesTypeName[] = "themes";
+constexpr char kHistoryTypeName[] = "history";
+constexpr char kExtensionsTypeName[] = "extensions";
+constexpr char kReadingListTypeName[] = "reading_list";
+
+// 2. 문자열을 입력받아 enum class 아이템을 리턴하는 함수
+std::optional<CopyUserSelectableType> GetUserSelectableTypeFromString(
+    std::string_view type_string) {
+  
+  // Chromium 아키텍처에서 가장 권장하는 이진 탐색 기반의 정적 맵(fixed_flat_map) 구조입니다.
+  // 컴파일 타임에 정렬되므로 런타임 조회 속도가 매우 빠르고 메모리 오버헤드가 없습니다.
+  static constexpr auto kTypeMap = base::MakeFixedFlatMap<std::string_view, CopyUserSelectableType>({
+      {kBookmarksTypeName, CopyUserSelectableType::kBookmarks},
+      {kPreferencesTypeName, CopyUserSelectableType::kPreferences},
+      {kPasswordsTypeName, CopyUserSelectableType::kPasswords},
+      {kAutofillTypeName, CopyUserSelectableType::kAutofill},
+      {kThemesTypeName, CopyUserSelectableType::kThemes},
+      {kHistoryTypeName, CopyUserSelectableType::kHistory},
+      {kExtensionsTypeName, CopyUserSelectableType::kExtensions},
+      {kReadingListTypeName, CopyUserSelectableType::kReadingList},
+  });
+
+  // 맵에서 매칭되는 문자열 키를 찾습니다.
+  auto it = kTypeMap.find(type_string);
+  if (it == kTypeMap.end()) {
+    return std::nullopt; // 일치하는 타입이 없을 경우 안전하게 nullopt 반환
+  }
+
+  return it->second; // 찾은 enum class 아이템 리턴
+}
+
+}  // namespace syncer
