@@ -17,7 +17,18 @@ const std::map<const std::string, const std::string> kPreferenceToCategory = {
 };
 
 
+std::vector<std::string_view> GetPreferencesFromCategory(std::string_view category_id) {
+  std::vector<std::string_view> matched_prefs;
 
+  // 정적 맵(kPreferenceToCategory)의 모든 요소를 순회합니다.
+  for (const auto& [pref, category] : kPreferenceToCategory) {
+    if (category == category_id) {
+      matched_prefs.push_back(pref);
+    }
+  }
+
+  return matched_prefs;
+}
 
 
 
