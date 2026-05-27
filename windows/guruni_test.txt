@@ -1,3 +1,36 @@
+const std::map<const std::string, const std::string> kPreferenceToCategory = {
+    {prefs::kSamsungAccountSyncBookmarks, sync::kBookmarksId},
+    {prefs::kSamsungAccountSyncOpenTabs, sync::kOpenTabsId},
+    {prefs::kSamsungAccountSyncQuickAccess, sync::kQuickAccessId},
+    {prefs::kSamsungAccountSyncHistory, sync::kHistoryId},
+    {prefs::kSamsungAccountSyncPass, sync::kPassId},
+    {prefs::kSamsungAccountSyncPassVault, sync::kPassId},
+    {prefs::kSamsungAccountSyncSettings, sync::kSettingsId}
+#if BUILDFLAG(ENABLE_SAMSUNG_EXTENSIONS_SYNC)
+    ,
+    {prefs::kSamsungAccountSyncExtensions, sync::kExtensionsId}
+#endif
+#if BUILDFLAG(SAMSUNG_INTERNET_SIDE_BAR_SYNC)
+    ,
+    {prefs::kSamsungAccountSyncSideBar, sync::kSideBarId}
+#endif
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #ifndef COMPONENTS_SYNC_BASE_COPY_USER_SELECTABLE_TYPE_H_
 #define COMPONENTS_SYNC_BASE_COPY_USER_SELECTABLE_TYPE_H_
 
