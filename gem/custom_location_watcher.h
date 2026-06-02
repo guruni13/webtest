@@ -8,28 +8,33 @@
 
 namespace win_util {
 
+// CustomLocationWatcher monitors a specific Windows registry key in real-time
+// to determine whether the device is inside (on-premise) or outside (off-premise)
+// the corporate network.
 class CustomLocationWatcher {
  public:
   CustomLocationWatcher();
   ~CustomLocationWatcher();
 
-  // 감시 시작 (UI 스레드 등 어디서나 호출 가능)
+  // Initializes the watcher and starts monitoring on a background thread.
+  // Safe to call from the UI thread.
   void Initialize();
 
  private:
-  // 백그라운드 스레드에서 실행될 실제 감시 등록 함수
+  // Sets up the registry watch on the background sequence.
   void StartWatchingOnBackgroundSequence();
   
-  // 레지스트리 변경 발생 시 백그라운드에서 호출되는 콜백
+  // Callback invoked on the background sequence when the registry key changes.
   void OnRegistryChanged();
   
-  // 변경된 값을 기반으로 크롬 메인(UI) 스레드에 알림을 보내는 함수
+  // Notifies the UI thread of the network location change.
   void NotifyLocationChangeToUIThread(const std::wstring& location);
 
-  // 백그라운드 작업을 실행할 전용 시퀀스 런너
+  // Task runner dedicated to executing blocking registry operations.
   scoped_refptr<base::SequencedTaskRunner> background_task_runner_;
 
-  // 백그라운드 시퀀스에서만 접근하고 제어할 레지스트리 키 객체
+  // The registry key object used for watching. 
+  // Must only be accessed on the background sequence.
   base::win::RegKey policy_key_;
 
   base::WeakPtrFactory<CustomLocationWatcher> weak_factory_{this};
