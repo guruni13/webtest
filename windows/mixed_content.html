@@ -26,7 +26,16 @@
       document.getElementById('img').classList.remove("http");
       document.getElementById('img').classList.remove("https");
       document.getElementById('img').classList.add(protocol);
-    }    
+    }
+    function changeImage2(protocol) {
+      document.getElementById('img2').src = "";
+      var url = protocol + "://mixed-content-test.appspot.com/image.jpg";
+      document.getElementById('img2').src = url;
+
+      document.getElementById('img2').classList.remove("http");
+      document.getElementById('img2').classList.remove("https");
+      document.getElementById('img2').classList.add(protocol);
+    }        
     function addScript(protocol, subdomainPrefix) {
       subdomainPrefix = subdomainPrefix || "";
       var url = protocol + "://" + subdomainPrefix + "mixed-content-test.appspot.com/script.js";
@@ -95,6 +104,10 @@
       background: inherit;
       border: 16px solid rgb(255, 82, 82);
     }
+    img2.http {
+      background: inherit;
+      border: 16px solid rgb(255, 82, 82);
+    }    
 
     guruni.https {
       background: inherit;
@@ -129,7 +142,14 @@
   <button onclick="changeImage('http')" class="http">HTTP Image</button>
   <button onclick="changeImage('https')" class="https">HTTPS Image</button><br><br>
   <img src="" id="img" alt="Test Image (this is the alt text)."><br>
+
+  <button onclick="changeImage2('http')" class="http">HTTP Image 2 </button>
+  <!-- <button onclick="changeImage2('https')" class="https">HTTPS Image 2</button><br><br> -->
+  <img src="" id="img2" alt="Test Image 2 (this is the alt text)."><br>
+  
   <img src="https://mixed-content-test.appspot.com/image.jpg" id="guruni" alt="guruni Test Image (this is the alt text).">
+  <img src="./login_google_1.png" id="guruni" alt="guruni Test Image (this is the alt text).">
+  <img src="./aaaaaaaaaabbbbbbbbbbbbbcccccdddddddddddeeeeffdddddddddddddddddddddd.png" id="guruni" alt="guruni Test Image (this is the alt text).">
 
 </div>
 <div class="section">
