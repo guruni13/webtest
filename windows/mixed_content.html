@@ -33,7 +33,7 @@
       var url = protocol + "://mixed-content-test.appspot.com/image.jpg";
       document.getElementById(guruni').src = url;
 
-      document.getElementById('img').classList.add(protocol);
+      document.getElementById('guruni').classList.add(protocol);
     }    
     
     function addScript(protocol, subdomainPrefix) {
@@ -137,7 +137,7 @@
 
   <button onclick="changeImage('http')" class="http">HTTP Image</button>
   <button onclick="changeImage('https')" class="https">HTTPS Image</button>
-  <button onclick="changeImageGuruni('https')" class="https">HTTPS Image</button><br><br>
+  <button onclick="changeImageGuruni('https')" class="https">guruni HTTPS Image</button><br><br>
   <img src="" id="img" alt="Test Image (this is the alt text).">
   <img src="" id="guruni" alt="guruni Test Image (this is the alt text).">
 
