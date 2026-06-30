@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+<!-- [START head_html] -->
+<head>
+  <title>Mixed Content Test Site</title>
+
+  <!-- HTML and CSS are inlined to avoid conflating them with test resources.  -->
+  <script>
+    function resetURL(age) {
+      window.location.href = "//mixed-content-test.appspot.com/";
+    }
+    function setHSTSMaxAge(age) {
+      window.location.href = "?hsts-max-age=" + age;
+    }
+    function loadPage(protocol) {
+      var url = protocol + "://mixed-content-test.appspot.com/";
+      window.location.href = url;
+    }
+    function changeImage(protocol) {
+      document.getElementById('img').src = "";
+      var url = protocol + "://mixed-content-test.appspot.com/image.jpg";
+      document.getElementById('img').src = url;
+
+      document.getElementById('img').classList.remove("http");
+      document.getElementById('img').classList.remove("https");
+      document.getElementById('img').classList.add(protocol);
+    }
+
+    function changeImageGuruni(protocol) {
+      document.getElementById('guruni').src = "";
+      var url = protocol + "://mixed-content-test.appspot.com/image.jpg";
+      document.getElementById(guruni').src = url;
+
+      document.getElementById('img').classList.add(protocol);
+    }    
+    
+    function addScript(protocol, subdomainPrefix) {
+      subdomainPrefix = subdomainPrefix || "";
+      var url = protocol + "://" + subdomainPrefix + "mixed-content-test.appspot.com/script.js";
+      var scriptElement = document.createElement("script");
+      scriptElement.src = url;
+
+      document.getElementById("messages").innerHTML += "<br><span class='" + protocol + "-light'>Trying to load script. [Protocol: " + protocol + "]</span>";
+      document.body.appendChild(scriptElement);
+    }
+    function addInsecureSubdomainScript() {
+      addScript("http", "insecure-subdomain.");
+    }
+  </script>
+  <style>
+    body {
+      font-family: Verdana, Helvetica, sans-serif;
+    }
+
+    div.section {
+      max-width: 90%;
+      background-color: rgb(225, 225, 225);
+      margin: 1em auto;
+      padding: 1em;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    button {
+      border: none;
+      padding: 8px;
+      margin: auto 4px;
+      font-size: 1em;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      transition: all 150ms;
+    }
+
+    button:hover {
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transform: translateY(-2px);
+    }
+
+    #messages {
+      background: rgb(200, 200, 200);
+      white-space: pre;
+      padding: 1em;
+      margin-top: -0.7em;
+      text-align: left;
+      font-family: monospace;
+    }
+
+    .https {
+      background: #4E4;
+    }
+
+    .http {
+      background: rgb(255, 82, 82);
+    }
+
+    img.https {
+      background: inherit;
+      border: 16px solid #4E4;
+    }
+
+    img.http {
+      background: inherit;
+      border: 16px solid rgb(255, 82, 82);
+    }
+
+    guruni.https {
+      background: inherit;
+      border: 16px solid rgb(255, 82, 82);
+    }    
+
+    .https-light {
+      background: rgba(68, 238, 68, 0.25);
+    }
+
+    .http-light {
+      background: rgba(255, 82, 82, 0.25);
+    }
+  </style>
+</head>
+<!-- [END head_html] -->
+<body class="https">
+
+<div class="section">
+
+  Mixed Content Test Site
+
+
+  <br><br>
+
+  <button onclick="loadPage('http')" class="http">HTTP Page</button>
+  <button onclick="loadPage('https')" class="https">HTTPS Page</button>
+
+</div>
+<div class="section">
+
+  <button onclick="changeImage('http')" class="http">HTTP Image</button>
+  <button onclick="changeImage('https')" class="https">HTTPS Image</button>
+  <button onclick="changeImageGuruni('https')" class="https">HTTPS Image</button><br><br>
+  <img src="" id="img" alt="Test Image (this is the alt text).">
+  <img src="" id="guruni" alt="guruni Test Image (this is the alt text).">
+
+</div>
+<div class="section">
+
+  <button onclick="addScript('http')" class="http">HTTP Script</button>
+  <button onclick="addScript('https')" class="https">HTTPS Script</button>
+  <br><br>
+  <button onclick="addInsecureSubdomainScript('http')" class="http">Subdomain HTTP Script</button>
+  
+
+</div><div class="section" id="messages">Script Messages go here:<br></div>
+<div class="section">
+  HSTS<br><div></div><br>
+  <button onclick="setHSTSMaxAge(0)">max-age=0</button>
+  <button onclick="setHSTSMaxAge(60)">max-age=60</button>
+  <button onclick="setHSTSMaxAge(10886400)">max-age=10886400</button>
+  <button onclick="resetURL()">Reset URL</button>
+</div>
+
+</body>
+</html>
