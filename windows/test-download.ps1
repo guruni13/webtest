@@ -10,8 +10,8 @@ $request = $context.Request
 $response = $context.Response
 
 # Content-Disposition 헤더 설정
-$nbsp = [char]0xA0
-$filename = "example.jpg$($nbsp * 60).exe"
+$nbsp = [string]::new([char]0xA0, 60)
+$filename = "example.jpg$nbsp.exe"
 $response.AddHeader("Content-Disposition", "attachment; filename=""$filename""")
 $response.ContentType = "application/octet-stream"
 
