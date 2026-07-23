@@ -1,3 +1,18 @@
+Pre-Condition:
+1. Connect to AI VDI [Sumwon]
+2. Browser Settings > browsing assist : ON
+3. Cmd prompt > enter "C:\Program Files\Samsung\Internet\Application\samsunginternet.exe" --flag-switches-begin --web-agent-backend-server=PrePRD --web-agent-url="https://browser.samsung.com/ai/pc/30.0.4/index.html?side&showversion=true" --flag-switches-end 
+4. Load multiple websites > check prompt generation > while testing noticed browser exits multiple times and .dmp files generated
+
+Steps:
+1. Browser launched > load below URL> browsing assist > ask anything >  Observe closed
+URL : https://time.com/article/2026/07/13/how-livestreamed-child-abuse-is-challenging-how-we-think-about-online-privacy/?
+
+
+
+
+____________________________________________
+
 const std::map<const std::string, const std::string> kPreferenceToCategory = {
     {prefs::kSamsungAccountSyncBookmarks, sync::kBookmarksId},
     {prefs::kSamsungAccountSyncOpenTabs, sync::kOpenTabsId},
